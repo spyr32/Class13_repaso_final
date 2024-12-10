@@ -52,7 +52,7 @@ def guardar_csv(ventas):
                  
     with open('ventas.csv',mode = 'w') as file:
         
-        guardado = csv.DictWriter(file,fieldnames=['producto','cantidad','precio'1,'fecha','cliente']) 
+        guardado = csv.DictWriter(file,fieldnames=['producto','cantidad','precio','fecha','cliente']) 
         
         guardado.writeheader()
         guardado.writerows(ventas)
@@ -82,7 +82,18 @@ def analizar_ventas(ventas):
     #cantidad_vendida =  df.groupby('Producto')['Cantidad'].sum()
     print(f'El producto mas vendido es {producto_mas_vendido} con estas unidades ')
     
-    print(producto_mas_vendido)           
+    print(producto_mas_vendido)
+    
+      #¿Quién fue el cliente con más compras?
+    cliente_mas_compras = df.groupby('cliente')['cantidad'].sum().idxmax()
+    print(f'El cliente con más compras es {cliente_mas_compras}.')
+
+    #¿Cuáles fueron las ventas por fecha?
+    ventas_por_fecha = df.groupby('fecha')['Subtotal'].sum()
+    print('\nVentas por fecha:')
+    print(ventas_por_fecha)
+    
+               
 
 def ingresar_datos(ventas):
 
